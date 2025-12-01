@@ -1,0 +1,219 @@
+.voter-list {
+    display: flex;
+    flex-direction: column;
+    padding: 8px;
+}
+
+.voter-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 10px;
+    border-radius: 12px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+    transition: background-color 0.2s ease;
+    gap: 10px;
+    overflow: hidden;
+    word-break: break-word;
+}
+
+.voter-serial {
+    font-size: 1.5rem;
+    /* Larger text */
+    font-weight: 700;
+    flex-shrink: 0;
+    /* Bold */
+    color: #333;
+    min-width: 45px;
+    /* Keeps numbers aligned vertically */
+    text-align: center;
+}
+
+.voter-card:hover {
+    transform: scale(1.01);
+}
+
+.party-badge {
+    border: solid;
+    flex-shrink: 0;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 8px;
+    font-weight: 600;
+    text-align: center;
+    min-width: 90px;
+    cursor: pointer;
+    transition: transform 0.1s ease;
+    min-width: 80px;
+}
+
+.party-badge:active {
+    transform: scale(0.95);
+}
+
+/* Info block */
+.voter-info {
+    flex: 1;
+    min-width: 0;
+    /* important for ellipsis to work */
+    max-width: 210px;
+    /* desktop view */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.voter-name {
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.voter-house {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.pagination-container .btn {
+    font-size: 0.9rem;
+    padding: 6px 12px;
+    border-radius: 6px;
+}
+
+.page-info {
+    font-weight: 600;
+    color: #333;
+}
+
+
+.voter-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+}
+
+.canvass-btn {
+    border: none;
+    background-color: #eee;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.canvass-btn.yes {
+    background-color: #d4edda;
+    color: #155724;
+    font-weight: 600;
+}
+
+.canvass-btn.no {
+    background-color: #f8d7da;
+    color: #721c24;
+    font-weight: 600;
+}
+
+
+/* Mobile optimization */
+@media (max-width: 600px) {
+    .voter-card {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        padding: 10px;
+    }
+
+    .voter-info {
+        flex: 1;
+        min-width: 150px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .voter-actions {
+        flex-shrink: 0;
+        text-align: right;
+    }
+
+    .pagination-container {
+        gap: 6px;
+    }
+
+    .pagination-container .btn {
+        padding: 4px 10px;
+        font-size: 0.85rem;
+    }
+
+    .page-info {
+        font-size: 0.85rem;
+    }
+}
+
+/* Move details closer on large screens */
+@media (min-width: 992px) {
+    .voter-card {
+        justify-content: flex-start;
+        /* align all items to left */
+        gap: 1.5rem;
+        /* control spacing manually */
+    }
+
+    .voter-index {
+        flex: 0 0 60px;
+        /* fixed width for index box */
+    }
+
+    .voter-details {
+        margin-left: 10px;
+        /* bring closer to index */
+        flex-grow: 1;
+        /* allow to fill available space */
+    }
+
+    .voter-status {
+        margin-left: auto;
+        /* stays right aligned */
+    }
+}
+
+
+@media (max-width: 576px) {
+    .voter-card {
+        padding: 10px;
+        border-radius: 10px;
+    }
+
+    .voter-serial {
+        font-size: 1.2rem;
+        min-width: 35px;
+    }
+
+    .voter-name {
+        font-size: 1rem;
+    }
+
+    .party-badge {
+        min-width: 70px;
+        font-size: 0.8rem;
+    }
+
+    .voter-info {
+        max-width: 130px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+}
