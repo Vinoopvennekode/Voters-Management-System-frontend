@@ -2,7 +2,7 @@ import React, { useState, useEffect, use } from "react";
 import { Link } from "react-router-dom";
 import api from "../api/axiosInstance"; // ✅ import your axios instance
 import { loader } from "../components/LoaderManager"; // optional if you want manual control
-import ChildModal from "./modal";
+import ChildModal from "./Modal";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 import ExcelJS from "exceljs";
@@ -418,3 +418,4 @@ const VotersList = () => {
 };
 
 export default VotersList;
+
