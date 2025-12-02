@@ -52,6 +52,27 @@ const ProtectedRoute = ({ children }) => {
 
 
 const App = () => {
+
+  // ⬇️⬇️ ADD THIS PART — PWA INSTALL PROMPT HANDLER ⬇️⬇️
+  const [installPrompt, setInstallPrompt] = useState(null);
+
+  useEffect(() => {
+    const handler = (e) => {
+      e.preventDefault();
+      setInstallPrompt(e); // save event for later use
+    };
+
+    window.addEventListener("beforeinstallprompt", handler);
+
+    return () => window.removeEventListener("beforeinstallprompt", handler);
+  }, []);
+
+  const handleInstallClick = () => {
+    if (!installPrompt) return;
+    installPrompt.prompt();
+    setInstallPrompt(null);
+  };
+  // ⬆️⬆️ END PWA PART ⬆️⬆️
   const [isSidebarOpen, setSidebarOpen] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Track login state
   const sidebarRef = useRef(null);
@@ -86,7 +107,27 @@ const App = () => {
   }, [isSidebarOpen]);
 
 
-  return (
+  return (<>
+    {/* ⬇️⬇️ ADD THIS BUTTON ANYWHERE OUTSIDE ROUTER ⬇️⬇️ */}
+    {installPrompt && (
+      <button
+        onClick={handleInstallClick}
+        style={{
+          position: "fixed",
+          bottom: "20px",
+          right: "20px",
+          padding: "12px 20px",
+          background: "#0d6efd",
+          color: "#fff",
+          borderRadius: "8px",
+          border: "none",
+          zIndex: 9999,
+        }}
+      >
+        Install App
+      </button>
+    )}
+    {/* ⬆️⬆️ END BUTTON ⬆️⬆️ */}
     <Router>
       <Routes>
         {/* ✅ Login route outside the layout */}
@@ -97,13 +138,13 @@ const App = () => {
           path="/*"
           element={
             <div className="app-container">
-                <>
-                  <Header toggleSidebar={toggleSidebar} isSidebarOpen={isSidebarOpen}/>
-                  <div ref={sidebarRef}>
+              <>
+                <Header toggleSidebar={toggleSidebar} isSidebarOpen={isSidebarOpen} />
+                <div ref={sidebarRef}>
 
-                    <Sidebar isOpen={isSidebarOpen} closeSidebar={closeSidebar} />
-                  </div>
-                </>
+                  <Sidebar isOpen={isSidebarOpen} closeSidebar={closeSidebar} />
+                </div>
+              </>
               <div className={`content ${isSidebarOpen ? "shift" : ""}`}>
                 <Routes>
                   {/* <Route
@@ -275,6 +316,8 @@ const App = () => {
         />
       </Routes>
     </Router>
+  </>
+
   );
 };
 
